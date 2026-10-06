@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mh3u-quest-randomizer",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5585", "--directory", "docs"],
+      "port": 5585
+    }
+  ]
+}
