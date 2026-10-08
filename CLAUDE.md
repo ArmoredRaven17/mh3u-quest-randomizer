@@ -40,17 +40,22 @@ export/import, reset, theme and stream pop-out are the GU app's. What changed fo
   MHGU's own quest card, so it doesn't carry over. The stream pop-out draws the same card from
   the same object (`mh3u-randomizer-last-result`) and takes the theme from
   `mh3u-randomizer-theme-vars`, so it has no copy of the colour math.
+- **Guild Card backgrounds** are 3U's own 49, cut from `arc/ID/card/ID_card_NN` by the build
+  script and named by the game's text (`DATA.cardBackgrounds`), in GU's picker layout: None, the
+  backgrounds, then Digital Blue / Digital Green for chroma-keying. A saved background is a file
+  stem (`card_05`), a colour or "". They're 512x256, the game's own size, so they're shown
+  cover-scaled rather than at GU's HD resolution.
 - **Dropped:** Twitch login/bot sync (its Worker backend reads MHGU data), the Possible
-  Combinations modal (replaced by a live pool count under the pickers), the Guild Card
-  backgrounds (MHGU's; the flat chroma-key colours stay), and the Gypceros/Khezu joke (neither
-  is in 3U, and the palette has no white).
+  Combinations modal (replaced by a live pool count under the pickers), and the Gypceros/Khezu
+  joke (neither is in 3U, and the palette has no white).
 - Storage keys are `mh3u-randomizer-*`. The theme palette and LEGACY_HEX are the MH3U apps'
   shared copy.
 
 ## Data
 
 `python scripts/build_data.py "C:\MH3U-Extract"` rewrites `docs/data.js`
-(`window.MH3U_RANDOMIZER_DATA = { quests, monsters, weaponIcons, icons }`) and the icon folders.
+(`window.MH3U_RANDOMIZER_DATA = { quests, monsters, weaponIcons, icons, cardBackgrounds }`), the icon
+folders and `docs/assets/GuildCardBG/`.
 The script header documents the file layout, including the Arena loaner block. Worth knowing:
 
 - Arena loaner sets: only the weapon is used. Several armor numbers in the sets land on "DUMMY"

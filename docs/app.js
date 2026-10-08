@@ -524,24 +524,46 @@
   if (!COLORS_HEX[String(savedTheme).toUpperCase()]) savedTheme = DEFAULT_THEME;
   applyTheme(savedTheme);
 
-  // Flat backdrops behind the card for chroma-keying the app itself on stream (the GU app's
-  // Digital Blue / Digital Green). The GU Guild Card photos are MHGU's, so they don't come along.
+  // Content backgrounds, as the GU app's picker: None, the game's own 49 Guild Card backgrounds
+  // (cut by the build script, named by the game's text), then two flat colours for chroma-keying
+  // the app itself on stream (Digital Blue / Digital Green). A saved value is a background's file
+  // stem, a colour, or "" — anything else falls back to None.
   const BG_KEY = "mh3u-randomizer-bg";
-  const SOLID_BG = [["None", ""], ["Digital Blue", "#0000FF"], ["Digital Green", "#00FF00"]];
+  const CARD_BGS = (DATA.cardBackgrounds || []).filter(b => b && /^card_\d\d$/.test(b.File));
+  const SOLID_BG = [["Digital Blue", "#0000FF"], ["Digital Green", "#00FF00"]];
+  const bgUrl = (stem) => "assets/GuildCardBG/" + stem + ".webp";
+  const thumbUrl = (stem) => "assets/GuildCardBG/thumbs/" + stem + ".webp";
+  let bgPick = 0;   // the latest pick wins, even if an earlier image finishes loading after it
   function applyBg(value) {
-    if (!SOLID_BG.some(([, v]) => v === value)) value = "";
-    $("content").style.background = value;
+    const content = $("content").style;
+    const pick = ++bgPick;
+    if (CARD_BGS.some(b => b.File === value)) {
+      // Swap in only once the full image has loaded, so the old background holds until then.
+      const img = new Image();
+      img.onload = () => { if (pick === bgPick) content.background = `center / cover no-repeat url('${bgUrl(value)}')`; };
+      img.src = bgUrl(value);
+    } else {
+      if (!SOLID_BG.some(([, v]) => v === value)) value = "";
+      content.background = value;
+    }
     try { localStorage.setItem(BG_KEY, value); } catch (e) {}
     document.querySelectorAll(".bg-thumb").forEach(t => t.classList.toggle("sel", t.dataset.value === value));
   }
-  for (const [name, value] of SOLID_BG) {
-    const d = el("div", "bg-thumb" + (value ? "" : " none-thumb"), value ? null : name);
+  function bgThumb(value, title, paint) {
+    const d = el("div", "bg-thumb", value ? null : title);
     d.dataset.value = value;
-    d.title = name;
-    if (value) d.style.background = value;
+    d.title = title;
+    paint(d.style);
     d.addEventListener("click", () => applyBg(value));
     $("bgGrid").appendChild(d);
+    return d;
   }
+  bgThumb("", "None", () => {}).classList.add("none-thumb");
+  for (const b of CARD_BGS) {
+    const d = bgThumb(b.File, b.Name, s => { s.backgroundImage = `url('${thumbUrl(b.File)}')`; });
+    d.addEventListener("mouseenter", () => { new Image().src = bgUrl(b.File); }, { once: true });
+  }
+  for (const [name, hex] of SOLID_BG) bgThumb(hex, name, s => { s.background = hex; });
   let savedBg = "";
   try { savedBg = localStorage.getItem(BG_KEY) || ""; } catch (e) {}
   applyBg(savedBg);

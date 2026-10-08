@@ -27,6 +27,8 @@ That's what **Copy to Clipboard** produces.
   the GU app's Chaos Mode.
 - **Stream view** — pops the card out on a chroma-key green background, updating with every
   roll and theme change.
+- **Guild Card backgrounds** — any of the game's 49 Guild Card backgrounds behind the app, or a
+  flat blue/green for chroma-keying.
 - **Themes, export/import, autosave** — the MH3U monster-icon themes shared with the other MH3U
   apps; filters and challenges are saved in the browser and can be exported to a file.
 
@@ -58,7 +60,8 @@ decompressed), Python 3.10+, Pillow and numpy:
 python scripts/build_data.py "C:\MH3U-Extract"
 ```
 
-This rewrites `docs/data.js`, `docs/assets/MonsterIcons/` and `docs/assets/WeaponIcons/`.
+This rewrites `docs/data.js`, `docs/assets/MonsterIcons/`, `docs/assets/WeaponIcons/` and
+`docs/assets/GuildCardBG/`.
 
 ## Cache busting
 

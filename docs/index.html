@@ -7,7 +7,7 @@
 <title>MH3U Quest Randomizer</title>
 <link rel="icon" href="assets/MonsterIcons/MH3U-Question_Mark_Icon.png">
 <!-- Bump ?v= on any styles/app/card/data change so browsers fetch fresh copies (no hard-refresh needed) -->
-<link rel="stylesheet" href="styles.css?v=1">
+<link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
 <div id="app">
@@ -138,10 +138,10 @@
     </ul>
     <p><strong>3. Hit Randomize.</strong> You get a quest and a weapon class, plus any challenges that rolled. Arena quests give you one of the quest's five loaner sets instead, since that's what you fight in.</p>
     <p>Quest badges: <span class="pill pill-urgent">Urgent</span> <span class="pill pill-key">Key</span> <span class="pill pill-hunt">Hunt</span> <span class="pill pill-capture">Capture</span> <span class="pill pill-repel">Repel</span> <span class="pill pill-sm">Small Monsters</span> <span class="pill pill-gathering">Delivery</span> <span class="pill pill-egg">Harvest Tour</span> <span class="pill pill-arena">Arena</span></p>
-    <p><strong>&#9881; Theme</strong> — change the color theme, or put a flat blue/green behind the card for chroma-keying.</p>
+    <p><strong>&#9881; Theme</strong> — change the color theme, and pick a Content Background: any of the game's 49 Guild Card backgrounds, or a flat blue/green for chroma-keying.</p>
     <p><strong>&#8599; Stream view</strong> — pops the result card out into its own window on a green background, updating with every roll, for capturing in OBS.</p>
     <p><strong>Export / Import</strong> — save your filters and challenges to a file, or load them back.</p>
-    <p class="muted">Filters, challenges and theme are saved between visits. Reset Filters restores the defaults and keeps your challenges.</p>
+    <p class="muted">Filters, challenges, theme and background are saved between visits. Reset Filters restores the defaults and keeps your challenges.</p>
     <div class="row end gap"><button id="helpClose" class="btn">Close</button></div>
   </div>
 </div>
@@ -201,7 +201,8 @@
       a weapon for when you can't decide what to hunt. Not affiliated with, endorsed by, or supported by Capcom.</p>
     <hr class="modal-divider">
     <p class="muted">Every quest — its name, star, locale, objective and monsters — and every Arena loaner set is read
-      from the game's own quest files, and the monster, quest and weapon icons are the game's own. Everything was
+      from the game's own quest files, and the monster, quest and weapon icons and the Guild Card backgrounds are the
+      game's own. Everything was
       extracted from a personally owned copy of the game; no game files are redistributed. Downloadable Event and
       Challenge Quests aren't on the cartridge, so they aren't in the pool. The monster classes in the Monsters
       filter are assigned by hand.</p>
@@ -226,8 +227,8 @@
   </div>
 </div>
 
-<script src="data.js?v=1"></script>
+<script src="data.js?v=2"></script>
 <script src="card.js?v=1"></script>
-<script src="app.js?v=1"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>
